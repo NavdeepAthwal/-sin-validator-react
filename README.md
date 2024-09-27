@@ -29,3 +29,5 @@ This project is a Social Insurance Number (SIN) validator built with React and T
    npm run build
 5. To preview the build locally
    npm run preview
+6. To perform tests
+   npm run test
