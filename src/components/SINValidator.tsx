@@ -5,23 +5,36 @@ interface ValidationResult {
   isValid: boolean;
   message: string;
 }
+
+// Function to validate SIN using given rules
 const validateSIN = (sinInput: string): ValidationResult => {
+  // Remove all non-digit characters
   const digitsOnly = sinInput.replace(/\D/g, "");
+
+  // Rule 1: Check digit count
+  // Ensures that the SIN consists of exactly 9 digits.
   if (digitsOnly.length !== 9) {
     return { isValid: false, message: "SIN must contain exactly 9 digits." };
   }
 
+  // Convert string to array of numbers
   const digits = [...digitsOnly].map(Number);
+
+  // Luhn Algorithm using reduce. The reduce method iterates over each digit in the digits array
   const sum = digits.reduce((accumulator, currentDigit, index) => {
     let digit = currentDigit;
+    // Double every second digit.The condition (index + 1) % 2 === 0 checks if the digit is in an even position.
+    // If the digit is in an even position, it's doubled.
     if ((index + 1) % 2 === 0) {
       digit *= 2;
-      if (digit > 9) digit -= 9;
+      if (digit > 9) digit -= 9; //If the result of doubling is greater than 9, subtract 9 from it. This is equivalent to adding the two digits of the product
     }
-    return accumulator + digit;
+    return accumulator + digit; //the processed digit is added to the accumulator, which starts at 0.
   }, 0);
 
+  // Check if the calculated sum satisfies the Luhn checksum condition
   const isValid = sum % 10 === 0;
+
   const message = isValid
     ? "SIN is valid."
     : "SIN is invalid based on checksum.";
@@ -32,41 +45,6 @@ const validateSIN = (sinInput: string): ValidationResult => {
 const SINValidator: React.FC = () => {
   const [sin, setSin] = useState<string>("");
   const [result, setResult] = useState<ValidationResult | null>(null);
-
-  // Function to validate SIN using the provided rules
-  const validateSIN = (sinInput: string): ValidationResult => {
-    // Remove all non-digit characters
-    const digitsOnly = sinInput.replace(/\D/g, "");
-
-    // Rule 1: Check digit count
-    // Ensures that the SIN consists of exactly 9 digits.
-    if (digitsOnly.length !== 9) {
-      return { isValid: false, message: "SIN must contain exactly 9 digits." };
-    }
-
-    // Convert string to array of numbers
-    const digits = [...digitsOnly].map(Number);
-
-    // Luhn Algorithm using reduce. The reduce method iterates over each digit in the digits array
-    const sum = digits.reduce((accumulator, currentDigit, index) => {
-      let digit = currentDigit;
-      // Double every second digit.The condition (index + 1) % 2 === 0 checks if the digit is in an even position.
-      // If the digit is in an even position, it's doubled.
-      if ((index + 1) % 2 === 0) {
-        digit *= 2;
-        if (digit > 9) digit -= 9; //If the result of doubling is greater than 9, subtract 9 from it. This is equivalent to adding the two digits of the product
-      }
-      return accumulator + digit; //the processed digit is added to the accumulator, which starts at 0.
-    }, 0);
-
-    // Check if the calculated sum satisfies the Luhn checksum condition
-    const isValid = sum % 10 === 0;
-    const message = isValid
-      ? "SIN is valid."
-      : "SIN is invalid based on checksum.";
-
-    return { isValid, message };
-  };
 
   // Handle form submission
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -102,5 +80,5 @@ const SINValidator: React.FC = () => {
   );
 };
 
-export { SINValidator, validateSIN }; // Export validateSIN function
+export { validateSIN, SINValidator }; // Export validateSIN function for testing
 export default SINValidator;
