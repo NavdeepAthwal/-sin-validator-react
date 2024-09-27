@@ -1,0 +1,117 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+body {
+  font-family: "Roboto", sans-serif;
+  background: linear-gradient(135deg, #ece9e6, #ffffff);
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.container {
+  background: #f0f3f4;
+  padding: 2.5em;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 400px;
+  transition: transform 0.3s ease;
+}
+
+.container:hover {
+  transform: translateY(-5px);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 1.5em;
+  color: #333333;
+}
+
+.sin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2em;
+}
+
+label {
+  font-weight: 700;
+  color: #555555;
+}
+
+input[type="text"] {
+  padding: 0.8em;
+  font-size: 1em;
+  border: 2px solid #cccccc;
+  border-radius: 6px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+  outline: none;
+}
+
+button {
+  padding: 0.8em;
+  font-size: 1em;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button:hover {
+  background-color: #0056b3;
+  transform: scale(1.02);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+.result-message {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  font-size: 1.1em;
+  padding: 0.8em;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.result-message.valid {
+  background-color: #e6f4ea;
+  color: #2e7d32;
+}
+
+.result-message.invalid {
+  background-color: #fbeaea;
+  color: #c62828;
+}
+
+.result-message svg {
+  font-size: 1.5em;
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 2em 1.5em;
+  }
+
+  h1 {
+    font-size: 1.5em;
+  }
+
+  .result-message {
+    font-size: 1em;
+  }
+}
