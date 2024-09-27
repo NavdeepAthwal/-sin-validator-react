@@ -21,13 +21,13 @@ This project is a Social Insurance Number (SIN) validator built with React and T
 1. **Clone the repository**:
    git clone https://github.com/NavdeepAthwal/sin-validator-react.git
    cd sin-validator-react
-2. Install dependencies
+2. Install dependencies :
    npm install
-3. Running the App
+3. Running the App :
    npm run dev
-4. Build for Production
+4. Build for Production :
    npm run build
-5. To preview the build locally
+5. To preview the build locally :
    npm run preview
-6. To perform tests
+6. To perform tests :
    npm run test
